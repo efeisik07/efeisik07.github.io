@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efe Işık — AI & Otomasyon Çözümleri</title>
+    <meta name="description" content="Antalya merkezli AI otomasyon geliştiricisi. İşletmenize özel chatbot, WhatsApp ve Telegram entegrasyonu çözümleri.">
+    <meta property="og:title" content="Efe Işık — AI & Otomasyon Çözümleri">
+    <meta property="og:description" content="İşletmenize özel akıllı asistanlar. WhatsApp, Telegram — 7/24 aktif yapay zeka destekli müşteri iletişimi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://efeisik.online">
+    <meta property="og:image" content="https://efeisik.online/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #09090b;
+            --bg-elevated: #0f0f12;
+            --bg-card: #131316;
+            --bg-card-hover: #1a1a1f;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #10b981;
+            --accent-hover: #34d399;
+            --accent-dim: rgba(16, 185, 129, 0.08);
+            --accent-border: rgba(16, 185, 129, 0.15);
+            --accent-glow: rgba(16, 185, 129, 0.2);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --radius: 12px;
+        }
+
+        /* ═══ LIGHT THEME ═══ */
+        [data-theme="light"] {
+            --bg: #fafafa;
+            --bg-elevated: #f4f4f5;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f9f9fb;
+            --text: #09090b;
+            --text-secondary: #52525b;
+            --text-muted: #71717a;
+            --accent: #059669;
+            --accent-hover: #047857;
+            --accent-dim: rgba(5, 150, 105, 0.06);
+            --accent-border: rgba(5, 150, 105, 0.15);
+            --accent-glow: rgba(5, 150, 105, 0.1);
+            --border: rgba(0, 0, 0, 0.06);
+            --border-hover: rgba(0, 0, 0, 0.12);
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(250, 250, 250, 0.8);
+        }
+
+        [data-theme="light"] .nav-links {
+            background: rgba(250, 250, 250, 0.95);
+        }
+
+        [data-theme="light"] .hero h1 {
+            background: linear-gradient(180deg, #09090b 0%, #52525b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        [data-theme="light"] .btn-primary { color: #fff; }
+
+        [data-theme="light"] .whatsapp-float { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3); }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ═══ SCROLL PROGRESS BAR ═══ */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 1002;
+            width: 0%;
+            transition: width 0.05s linear;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* ═══ THEME TOGGLE ═══ */
+        .theme-toggle {
+            position: fixed;
+            top: 18px;
+            right: 140px;
+            z-index: 1001;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-border);
+        }
+
+        .theme-toggle svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s;
+        }
+
+        .theme-toggle:hover svg { stroke: var(--accent); }
+
+        .theme-toggle .icon-moon { display: block; }
+        .theme-toggle .icon-sun { display: none; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+
+        /* ═══ LANG SWITCHER ═══ */
+        .lang-switch {
+            position: fixed;
+            top: 18px;
+            right: 80px;
+            z-index: 1001;
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .lang-btn {
+            padding: 6px 12px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-secondary);
+        }
+
+        /* ═══ NAVIGATION ═══ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(9, 9, 11, 0.7);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger svg { stroke: var(--text-secondary); }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 65%);
+            opacity: 0.4;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 680px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 1px solid var(--accent-border);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-label svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2.5px;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #fafafa 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-typed-wrapper {
+            height: 56px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-typed {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .typed-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: var(--accent);
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--border-hover);
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ═══ SECTIONS ═══ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section { padding: 7rem 0; }
+
+        .section-header { margin-bottom: 3.5rem; }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -1.2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 460px;
+        }
+
+        /* ═══ SERVICES ═══ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            transition: background 0.3s;
+        }
+
+        .service-card:hover { background: var(--bg-card-hover); }
+
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .service-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+
+        /* ═══ PROCESS / NASIL ÇALIŞIR ═══ */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: calc(16.66% + 1rem);
+            right: calc(16.66% + 1rem);
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-border), var(--accent));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-number {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .process-number svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .process-step:hover .process-number {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+            transform: scale(1.08);
+        }
+
+        .process-step h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+
+        /* ═══ SECTORS ═══ */
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .sector-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            transition: all 0.25s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sector-card:hover {
+            border-color: var(--accent-border);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .sector-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .sector-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--accent-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+
+        .sector-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sector-expand {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .sector-expand svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sector-card.expanded .sector-expand {
+            transform: rotate(180deg);
+        }
+
+        .sector-card h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .sector-card .sector-summary {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .sector-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .sector-card.expanded .sector-detail {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        .sector-detail p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.7;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .sector-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .sector-tag {
+            padding: 3px 10px;
+            background: var(--accent-dim);
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* ═══ CTA BANNER ═══ */
+        .cta-banner {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-elevated);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .cta-inner {
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-inner h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .cta-inner p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 420px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        /* ═══ ABOUT ═══ */
+        .about-content { max-width: 600px; }
+
+        .about-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            padding: 6px 14px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--accent-border);
+            color: var(--accent);
+        }
+
+        /* ═══ CONTACT ═══ */
+        .contact-section { border-top: 1px solid var(--border); }
+
+        .contact-inner {
+            text-align: center;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .contact-inner > p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent-border);
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 1.5;
+            transition: stroke 0.2s;
+        }
+
+        .contact-link:hover svg { stroke: var(--accent); }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ═══ CHATBOT DEMO ═══ */
+        .chatbot-trigger {
+            position: fixed;
+            bottom: 96px;
+            right: 28px;
+            z-index: 998;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .chatbot-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.45);
+        }
+
+        .chatbot-trigger svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            stroke: #fff;
+            stroke-width: 0;
+        }
+
+        .chatbot-trigger .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ef4444;
+            border: 2px solid var(--bg);
+            animation: badgePulse 2s infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 156px;
+            right: 28px;
+            width: 340px;
+            max-height: 440px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            z-index: 998;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: chatSlideUp 0.3s ease;
+        }
+
+        .chatbot-window.open { display: flex; }
+
+        @keyframes chatSlideUp {
+            from { opacity: 0; transform: translateY(16px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .chatbot-header {
+            padding: 14px 16px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-avatar svg {
+            width: 18px;
+            height: 18px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .chatbot-header-info h4 {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .chatbot-header-info span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.7rem;
+        }
+
+        .chatbot-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .chatbot-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: rgba(255,255,255,0.7);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .chatbot-close:hover svg { stroke: #fff; }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+            min-height: 200px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            animation: msgAppear 0.3s ease;
+        }
+
+        @keyframes msgAppear {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg.bot {
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+
+        .chat-msg.user {
+            background: var(--accent);
+            color: #fff;
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+
+        .chat-typing {
+            display: flex;
+            gap: 4px;
+            padding: 10px 14px;
+            align-self: flex-start;
+        }
+
+        .chat-typing span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: typingDot 1.2s infinite;
+        }
+
+        .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingDot {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-4px); }
+        }
+
+        .chatbot-input {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--text);
+            font-size: 0.8rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .chat-sector-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 4px 0;
+        }
+
+        .chat-sector-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .chat-sector-btn:hover {
+            border-color: var(--accent-border);
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .chat-sector-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            flex-shrink: 0;
+        }
+
+        .chatbot-input input::placeholder { color: var(--text-muted); }
+        .chatbot-input input:focus { border-color: var(--accent-border); }
+
+        .chatbot-send {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--accent);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .chatbot-send:hover { background: var(--accent-hover); }
+
+        .chatbot-send svg {
+            width: 14px;
+            height: 14px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        @media (max-width: 768px) {
+            .chatbot-window {
+                right: 12px;
+                left: 12px;
+                bottom: 140px;
+                width: auto;
+            }
+            .chatbot-trigger { bottom: 82px; right: 20px; width: 44px; height: 44px; }
+        }
+
+        /* ═══ WHATSAPP FLOAT ═══ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25d366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            animation: whatsappPulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.55);
+        }
+
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        @keyframes whatsappPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 28px rgba(37, 211, 102, 0.6); }
+        }
+
+        /* ═══ PRELOADER ═══ */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .preloader.done {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text);
+            animation: preloaderPulse 1s ease-in-out infinite;
+        }
+
+        .preloader-logo span { color: var(--accent); }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.96); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ═══ HERO MOUSE GLOW ═══ */
+        .hero-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            transform: translate(-50%, -50%);
+            filter: blur(40px);
+            z-index: 0;
+        }
+
+        .hero:hover .hero-glow { opacity: 0.5; }
+
+        /* ═══ PARTICLES ═══ */
+        .particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ═══ NAV ACTIVE ═══ */
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* ═══ TILT CARDS ═══ */
+        .sector-card {
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+
+        /* ═══ MAGNETIC BUTTONS ═══ */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* ═══ SERVICE CARD GLOW ON HOVER ═══ */
+        .service-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        /* ═══ FLOATING ANIMATION FOR ICONS ═══ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .service-icon { animation: float 3s ease-in-out infinite; }
+        .service-card:nth-child(2) .service-icon { animation-delay: 0.5s; }
+        .service-card:nth-child(3) .service-icon { animation-delay: 1s; }
+        .service-card:nth-child(4) .service-icon { animation-delay: 1.5s; }
+
+        .process-number { animation: float 3s ease-in-out infinite; }
+        .process-step:nth-child(2) .process-number { animation-delay: 0.4s; }
+        .process-step:nth-child(3) .process-number { animation-delay: 0.8s; }
+
+        /* ═══ HERO BADGE FLOAT ═══ */
+        .hero-label { animation: float 4s ease-in-out infinite; }
+
+        /* ═══ GRADIENT TEXT SHIMMER ═══ */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .section-title {
+            background: linear-gradient(90deg, var(--text) 40%, var(--accent) 50%, var(--text) 60%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title.shimmer-active {
+            animation: shimmer 3s linear 1;
+        }
+
+        /* ═══ SECTOR TAG SLIDE IN ═══ */
+        .sector-tag {
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .sector-card.visible .sector-tag,
+        .reveal.visible .sector-tag {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sector-tag:nth-child(2) { transition-delay: 0.1s; }
+
+        /* ═══ TECH STACK STAGGER ═══ */
+        .tech-item {
+            opacity: 0;
+            transform: translateY(10px) scale(0.9);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .reveal.visible .tech-item { opacity: 1; transform: translateY(0) scale(1); }
+        .reveal.visible .tech-item:nth-child(1) { transition-delay: 0.05s; }
+        .reveal.visible .tech-item:nth-child(2) { transition-delay: 0.1s; }
+        .reveal.visible .tech-item:nth-child(3) { transition-delay: 0.15s; }
+        .reveal.visible .tech-item:nth-child(4) { transition-delay: 0.2s; }
+        .reveal.visible .tech-item:nth-child(5) { transition-delay: 0.25s; }
+        .reveal.visible .tech-item:nth-child(6) { transition-delay: 0.3s; }
+        .reveal.visible .tech-item:nth-child(7) { transition-delay: 0.35s; }
+        .reveal.visible .tech-item:nth-child(8) { transition-delay: 0.4s; }
+        .reveal.visible .tech-item:nth-child(9) { transition-delay: 0.45s; }
+
+        /* ═══ CONTACT LINK STAGGER ═══ */
+        .contact-link {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.3s;
+        }
+
+        .reveal.visible .contact-link { opacity: 1; transform: translateY(0); }
+        .reveal.visible .contact-link:nth-child(1) { transition-delay: 0.1s; }
+        .reveal.visible .contact-link:nth-child(2) { transition-delay: 0.2s; }
+        .reveal.visible .contact-link:nth-child(3) { transition-delay: 0.3s; }
+
+        .contact-link:hover { transform: translateY(-3px) !important; }
+
+        /* ═══ ANIMATIONS ═══ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.15s; }
+        .reveal-delay-3 { transition-delay: 0.2s; }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            .lang-switch { right: 60px; top: 20px; }
+            .theme-toggle { right: 108px; top: 20px; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(9, 9, 11, 0.95);
+                backdrop-filter: blur(24px);
+                padding: 1rem 2rem 1.5rem;
+                gap: 0.75rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .services-grid { grid-template-columns: 1fr; }
+            .sectors-grid { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .process-grid::before { display: none; }
+            section { padding: 5rem 0; }
+            .container { padding: 0 1.25rem; }
+            .section-title { font-size: 1.75rem; }
+            .hero-typed-wrapper { height: auto; min-height: 56px; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .whatsapp-float svg { width: 24px; height: 24px; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">efe<span>.</span></div>
+    </div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+
+    <!-- LANG SWITCH -->
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="tr" onclick="switchLang('tr')">TR</button>
+        <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">efe<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hizmetler" data-tr="Hizmetler" data-en="Services">Hizmetler</a></li>
+                <li><a href="#sektorler" data-tr="Sektörler" data-en="Industries">Sektörler</a></li>
+                <li><a href="#hakkimda" data-tr="Hakkımda" data-en="About">Hakkımda</a></li>
+                <li><a href="#iletisim" data-tr="İletişim" data-en="Contact">İletişim</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menü">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="4" y1="7" x2="20" y2="7"/>
+                    <line x1="4" y1="12" x2="20" y2="12"/>
+                    <line x1="4" y1="17" x2="20" y2="17"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="heroSection">
+        <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+        <div class="hero-glow" id="heroGlow"></div>
+        <div class="hero-content">
+            <div class="hero-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                AI & Automation
+            </div>
+            <h1>Efe Işık</h1>
+            <div class="hero-typed-wrapper">
+                <p class="hero-typed" id="heroTyped"></p>
+            </div>
+            <div class="hero-actions">
+                <a href="#cta" class="btn btn-primary" data-tr="Ücretsiz Demo İsteyin" data-en="Request Free Demo">
+                    Ücretsiz Demo İsteyin
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <a href="#sektorler" class="btn btn-secondary" data-tr="Çözümleri İncele" data-en="Explore Solutions">Çözümleri İncele</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="hizmetler">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label" data-tr="Hizmetler" data-en="Services">Hizmetler</div>
+                <h2 class="section-title" data-tr="Ne Yapıyorum?" data-en="What I Do">Ne Yapıyorum?</h2>
+                <p class="section-description" data-tr="İşletmenizi dijitalde güçlendiren yapay zeka ve otomasyon çözümleri." data-en="AI and automation solutions that strengthen your business digitally.">İşletmenizi dijitalde güçlendiren yapay zeka ve otomasyon çözümleri.</p>
+            </div>
+
+            <div class="services-grid reveal">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="2"/><path d="m18 14-4-4-6 6"/></svg>
+                    </div>
+                    <h3 data-tr="Akıllı Chatbot Geliştirme" data-en="Smart Chatbot Development">Akıllı Chatbot Geliştirme</h3>
+                    <p data-tr="İşletmenizin sorularını anlayan ve doğru cevap veren yapay zeka destekli asistanlar." data-en="AI-powered assistants that understand your business queries and provide accurate answers.">İşletmenizin sorularını anlayan ve doğru cevap veren yapay zeka destekli asistanlar.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    </div>
+                    <h3 data-tr="WhatsApp & Telegram Entegrasyonu" data-en="WhatsApp & Telegram Integration">WhatsApp & Telegram Entegrasyonu</h3>
+                    <p data-tr="Müşterilerinizin en çok kullandığı platformlarda 7/24 aktif akıllı asistan." data-en="Smart assistant active 24/7 on the platforms your customers use most.">Müşterilerinizin en çok kullandığı platformlarda 7/24 aktif akıllı asistan.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/><path d="M8 12a4 4 0 014-4"/></svg>
+                    </div>
+                    <h3 data-tr="Yapay Zeka Destekli İletişim" data-en="AI-Powered Communication">Yapay Zeka Destekli İletişim</h3>
+                    <p data-tr="Doğal dil anlayan, insan gibi konuşan akıllı müşteri iletişim sistemi." data-en="Intelligent customer communication system that understands natural language.">Doğal dil anlayan, insan gibi konuşan akıllı müşteri iletişim sistemi.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    </div>
+                    <h3 data-tr="İşletmeye Özel Çözümler" data-en="Custom Business Solutions">İşletmeye Özel Çözümler</h3>
+                    <p data-tr="İhtiyacınıza göre tasarlanan, tamamen size özel otomasyon sistemleri." data-en="Fully customized automation systems designed for your specific needs.">İhtiyacınıza göre tasarlanan, tamamen size özel otomasyon sistemleri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- NASIL ÇALIŞIR -->
+    <section id="nasil-calisir">
+        <div class="container">
+            <div class="section-header reveal" style="text-align:center; max-width:480px; margin-left:auto; margin-right:auto;">
+                <div class="section-label" style="text-align:center;" data-tr="Süreç" data-en="Process">Süreç</div>
+                <h2 class="section-title" style="text-align:center;" data-tr="Nasıl Çalışır?" data-en="How It Works?">Nasıl Çalışır?</h2>
+                <p class="section-description" style="text-align:center; margin:0 auto;" data-tr="Üç basit adımda işletmeniz için akıllı sistem." data-en="A smart system for your business in three simple steps.">Üç basit adımda işletmeniz için akıllı sistem.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step reveal">
+                    <div class="process-number">
+                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                    </div>
+                    <h3 data-tr="İhtiyacınızı Konuşalım" data-en="Let's Discuss Your Needs">İhtiyacınızı Konuşalım</h3>
+                    <p data-tr="İşletmenizi anlatın, hangi sorunları çözmek istediğinizi konuşalım." data-en="Tell me about your business and what problems you want to solve.">İşletmenizi anlatın, hangi sorunları çözmek istediğinizi konuşalım.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-1">
+                    <div class="process-number">
+                        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3 data-tr="Demo Hazırlayalım" data-en="Let's Prepare a Demo">Demo Hazırlayalım</h3>
+                    <p data-tr="Size özel çalışan bir demo hazırlayıp göstereyim. Beğenmezseniz zorunluluk yok." data-en="I'll prepare a working demo customized for you. No obligation if you don't like it.">Size özel çalışan bir demo hazırlayıp göstereyim. Beğenmezseniz zorunluluk yok.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-2">
+                    <div class="process-number">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 data-tr="Sistemi Kuralım" data-en="Let's Set It Up">Sistemi Kuralım</h3>
+                    <p data-tr="Onayladıktan sonra sistemi kurup devreye alıyorum. Destek her zaman yanınızda." data-en="After your approval, I set up and deploy the system. Support is always available.">Onayladıktan sonra sistemi kurup devreye alıyorum. Destek her zaman yanınızda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTORS -->
+    <section id="sektorler">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label" data-tr="Sektörler" data-en="Industries">Sektörler</div>
+                <h2 class="section-title" data-tr="Sektör Çözümleri" data-en="Industry Solutions">Sektör Çözümleri</h2>
+                <p class="section-description" data-tr="Her sektöre özel, işletmenize uygun akıllı sistemler." data-en="Smart systems tailored to your industry and business needs.">Her sektöre özel, işletmenize uygun akıllı sistemler.</p>
+            </div>
+
+            <div class="sectors-grid">
+                <div class="sector-card reveal" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-2-2.2-3.5C13 5.3 11.8 5 11 5H6c-.6 0-1.1.2-1.4.6L3 8c-.6.8-1 1.5-1 2.4V16c0 .6.4 1 1 1h1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Sürücü Kursları" data-en="Driving Schools">Sürücü Kursları</h3>
+                    <p class="sector-summary" data-tr="Kurs bilgileri, fiyat, belgeler, kayıt süreci — tüm sorulara 7/24 otomatik yanıt." data-en="Course info, pricing, documents, registration — 24/7 automated answers.">Kurs bilgileri, fiyat, belgeler, kayıt süreci — tüm sorulara 7/24 otomatik yanıt.</p>
+                    <div class="sector-tags"><span class="sector-tag">Bilgi Asistanı</span><span class="sector-tag">Kayıt Yönlendirme</span></div>
+                    <div class="sector-detail"><p data-tr="Bot, müşterilerinizin en sık sorduğu soruları anında yanıtlar: ehliyet türleri, gerekli belgeler, fiyat ve taksit seçenekleri, sınav süreçleri. Mesai saatleri dışında bile müşteri kaybetmezsiniz." data-en="The bot instantly answers your customers' most common questions: license types, required documents, pricing and payment options, exam processes. You never lose a customer, even outside business hours.">Bot, müşterilerinizin en sık sorduğu soruları anında yanıtlar: ehliyet türleri, gerekli belgeler, fiyat ve taksit seçenekleri, sınav süreçleri. Mesai saatleri dışında bile müşteri kaybetmezsiniz.</p></div>
+                </div>
+
+                <div class="sector-card reveal reveal-delay-1" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Restoran & Kafe" data-en="Restaurant & Cafe">Restoran & Kafe</h3>
+                    <p class="sector-summary" data-tr="Menü bilgisi, rezervasyon alma, çalışma saatleri ve konum yönlendirme." data-en="Menu info, reservations, business hours and location guidance.">Menü bilgisi, rezervasyon alma, çalışma saatleri ve konum yönlendirme.</p>
+                    <div class="sector-tags"><span class="sector-tag">Rezervasyon</span><span class="sector-tag">Menü Bot</span></div>
+                    <div class="sector-detail"><p data-tr="Müşteriniz WhatsApp'tan menünüzü inceleyebilir, masa rezervasyonu yapabilir, güncel kampanyalarınızı görebilir. Garson veya kasiyer meşgulken bile müşteri ilgilenilmiş olur." data-en="Customers can browse your menu via WhatsApp, make table reservations, and view current promotions. Even when staff is busy, customers are always attended to.">Müşteriniz WhatsApp'tan menünüzü inceleyebilir, masa rezervasyonu yapabilir, güncel kampanyalarınızı görebilir. Garson veya kasiyer meşgulken bile müşteri ilgilenilmiş olur.</p></div>
+                </div>
+
+                <div class="sector-card reveal reveal-delay-2" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Kuaför & Güzellik" data-en="Hair Salon & Beauty">Kuaför & Güzellik</h3>
+                    <p class="sector-summary" data-tr="Online randevu alma, hizmet fiyatları, uygun saat bulma ve hatırlatma." data-en="Online booking, service pricing, availability check and reminders.">Online randevu alma, hizmet fiyatları, uygun saat bulma ve hatırlatma.</p>
+                    <div class="sector-tags"><span class="sector-tag">Randevu Sistemi</span><span class="sector-tag">Hatırlatma</span></div>
+                    <div class="sector-detail"><p data-tr="Müşterileriniz 7/24 randevu alabilir, uygun saatleri görebilir, randevu öncesi otomatik hatırlatma alır. Gelmeme oranınız düşer, takvim verimli dolar." data-en="Customers can book 24/7, see available slots, and receive automatic reminders. No-show rates drop and your calendar fills efficiently.">Müşterileriniz 7/24 randevu alabilir, uygun saatleri görebilir, randevu öncesi otomatik hatırlatma alır. Gelmeme oranınız düşer, takvim verimli dolar.</p></div>
+                </div>
+
+                <div class="sector-card reveal" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Klinik & Muayenehane" data-en="Clinic & Medical Office">Klinik & Muayenehane</h3>
+                    <p class="sector-summary" data-tr="Hasta randevu yönetimi, bilgilendirme ve otomatik hatırlatma sistemi." data-en="Patient appointment management, information and automatic reminders.">Hasta randevu yönetimi, bilgilendirme ve otomatik hatırlatma sistemi.</p>
+                    <div class="sector-tags"><span class="sector-tag">Randevu</span><span class="sector-tag">Hasta İletişimi</span></div>
+                    <div class="sector-detail"><p data-tr="Hastalar randevu alabilir, muayene öncesi gerekli bilgileri öğrenebilir, otomatik hatırlatma alır. Sekreterya yükü azalır, hasta memnuniyeti artar." data-en="Patients can book appointments, learn pre-visit requirements, and receive reminders. Front desk workload decreases, patient satisfaction increases.">Hastalar randevu alabilir, muayene öncesi gerekli bilgileri öğrenebilir, otomatik hatırlatma alır. Sekreterya yükü azalır, hasta memnuniyeti artar.</p></div>
+                </div>
+
+                <div class="sector-card reveal reveal-delay-1" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Spor Salonu & Stüdyo" data-en="Gym & Studio">Spor Salonu & Stüdyo</h3>
+                    <p class="sector-summary" data-tr="Üyelik bilgisi, ders programı, PT randevusu ve kampanya bildirimleri." data-en="Membership info, class schedules, PT booking and campaign notifications.">Üyelik bilgisi, ders programı, PT randevusu ve kampanya bildirimleri.</p>
+                    <div class="sector-tags"><span class="sector-tag">Üyelik Bot</span><span class="sector-tag">Program Bilgisi</span></div>
+                    <div class="sector-detail"><p data-tr="Potansiyel üyeler fiyat ve program bilgisi alır, mevcut üyeler ders saatlerini sorar, PT randevusu alır. Kampanya dönemlerinde toplu bildirim gönderilebilir." data-en="Prospects get pricing and schedule info, members check class times, book PT sessions. Bulk notifications can be sent during campaign periods.">Potansiyel üyeler fiyat ve program bilgisi alır, mevcut üyeler ders saatlerini sorar, PT randevusu alır. Kampanya dönemlerinde toplu bildirim gönderilebilir.</p></div>
+                </div>
+
+                <div class="sector-card reveal reveal-delay-2" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Otel & Pansiyon" data-en="Hotel & Guesthouse">Otel & Pansiyon</h3>
+                    <p class="sector-summary" data-tr="Müsaitlik sorgulama, fiyat bilgisi, rezervasyon yönlendirme ve konum desteği." data-en="Availability check, pricing, reservation guidance and location support.">Müsaitlik sorgulama, fiyat bilgisi, rezervasyon yönlendirme ve konum desteği.</p>
+                    <div class="sector-tags"><span class="sector-tag">Rezervasyon</span><span class="sector-tag">Misafir Desteği</span></div>
+                    <div class="sector-detail"><p data-tr="Misafirler oda müsaitliği ve fiyatı anında öğrenir, konum tarifi alır, check-in/check-out bilgisi alır. Yoğun sezonda telefon trafiği büyük ölçüde azalır." data-en="Guests instantly check availability and pricing, get directions, and receive check-in/check-out info. Phone traffic significantly decreases during peak season.">Misafirler oda müsaitliği ve fiyatı anında öğrenir, konum tarifi alır, check-in/check-out bilgisi alır. Yoğun sezonda telefon trafiği büyük ölçüde azalır.</p></div>
+                </div>
+
+                <div class="sector-card reveal" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Kargo & Lojistik" data-en="Shipping & Logistics">Kargo & Lojistik</h3>
+                    <p class="sector-summary" data-tr="Gönderi takibi, teslimat durumu sorgulama ve müşteri bilgilendirme botu." data-en="Shipment tracking, delivery status queries and customer notification bot.">Gönderi takibi, teslimat durumu sorgulama ve müşteri bilgilendirme botu.</p>
+                    <div class="sector-tags"><span class="sector-tag">Takip Sistemi</span><span class="sector-tag">Bilgilendirme</span></div>
+                    <div class="sector-detail"><p data-tr="Müşteriler takip numarasıyla kargolarını sorgular, teslimat durumu hakkında otomatik bildirim alır. 'Kargom nerede?' aramalarında ciddi azalma sağlanır." data-en="Customers track shipments by tracking number, receive automatic delivery status updates. 'Where's my package?' calls are significantly reduced.">Müşteriler takip numarasıyla kargolarını sorgular, teslimat durumu hakkında otomatik bildirim alır. "Kargom nerede?" aramalarında ciddi azalma sağlanır.</p></div>
+                </div>
+
+                <div class="sector-card reveal reveal-delay-1" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Emlak & Gayrimenkul" data-en="Real Estate">Emlak & Gayrimenkul</h3>
+                    <p class="sector-summary" data-tr="İlan paylaşımı, fiyat sorgulama, randevu alma ve filtreli arama asistanı." data-en="Listing sharing, price queries, appointment booking and filtered search assistant.">İlan paylaşımı, fiyat sorgulama, randevu alma ve filtreli arama asistanı.</p>
+                    <div class="sector-tags"><span class="sector-tag">İlan Asistanı</span><span class="sector-tag">Randevu</span></div>
+                    <div class="sector-detail"><p data-tr="Müşteri bütçesini ve isteklerini söyler, bot uygun ilanları listeler. Gezme randevusu alınır, müşteri profili otomatik kaydedilir. Danışman zamanını verimli kullanır." data-en="Customers state their budget and preferences, the bot lists matching properties. Viewing appointments are scheduled and client profiles are saved automatically.">Müşteri bütçesini ve isteklerini söyler, bot uygun ilanları listeler. Gezme randevusu alınır, müşteri profili otomatik kaydedilir. Danışman zamanını verimli kullanır.</p></div>
+                </div>
+
+                <div class="sector-card reveal reveal-delay-2" onclick="toggleSector(this)">
+                    <div class="sector-top">
+                        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                        <div class="sector-expand"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                    <h3 data-tr="Eğitim & Kurs" data-en="Education & Training">Eğitim & Kurs</h3>
+                    <p class="sector-summary" data-tr="Kurs programı, fiyat bilgisi, kayıt süreci ve öğrenci destek asistanı." data-en="Course programs, pricing, registration process and student support assistant.">Kurs programı, fiyat bilgisi, kayıt süreci ve öğrenci destek asistanı.</p>
+                    <div class="sector-tags"><span class="sector-tag">Kayıt Asistanı</span><span class="sector-tag">Öğrenci Desteği</span></div>
+                    <div class="sector-detail"><p data-tr="Kurs adayları program detaylarını, fiyatları ve kayıt şartlarını öğrenir. Mevcut öğrenciler ders programını, sınav tarihlerini sorgular. Sekreterya iş yükü hafifler." data-en="Prospective students learn program details, pricing and enrollment requirements. Current students check schedules and exam dates. Administrative workload is reduced.">Kurs adayları program detaylarını, fiyatları ve kayıt şartlarını öğrenir. Mevcut öğrenciler ders programını, sınav tarihlerini sorgular. Sekreterya iş yükü hafifler.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section id="cta" class="cta-banner">
+        <div class="cta-inner reveal">
+            <h2 data-tr="Ücretsiz Demo İsteyin" data-en="Request a Free Demo">Ücretsiz Demo İsteyin</h2>
+            <p data-tr="İşletmenize özel bir demo hazırlayayım. Nasıl çalıştığını görün, sonra karar verin." data-en="Let me prepare a custom demo for your business. See how it works, then decide.">İşletmenize özel bir demo hazırlayayım. Nasıl çalıştığını görün, sonra karar verin.</p>
+            <a href="mailto:efeisik2302@gmail.com?subject=Demo%20Talebi" class="btn btn-primary" data-tr="Demo İçin Yazın" data-en="Write for Demo">
+                Demo İçin Yazın
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="hakkimda">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label" data-tr="Hakkımda" data-en="About">Hakkımda</div>
+                <h2 class="section-title" data-tr="Ben Kimim?" data-en="Who Am I?">Ben Kimim?</h2>
+            </div>
+
+            <div class="about-content reveal">
+                <p data-tr="19 yaşında, Antalya merkezli bir AI otomasyon geliştiricisiyim. İşletmelerin dijital dünyada daha güçlü olması için yapay zeka ve otomasyon çözümleri geliştiriyorum." data-en="I'm a 19-year-old AI automation developer based in Antalya, Turkey. I build AI and automation solutions to help businesses thrive in the digital world.">19 yaşında, Antalya merkezli bir AI otomasyon geliştiricisiyim. İşletmelerin dijital dünyada daha güçlü olması için yapay zeka ve otomasyon çözümleri geliştiriyorum.</p>
+                <p data-tr="Her işletmenin ihtiyacı farklıdır — ben de çözümlerimi buna göre özelleştiriyorum. Amacım, teknolojiyi karmaşık olmaktan çıkarıp işinize gerçekten değer katan bir araca dönüştürmek." data-en="Every business has different needs — I customize my solutions accordingly. My goal is to turn technology from something complex into a tool that truly adds value to your business.">Her işletmenin ihtiyacı farklıdır — ben de çözümlerimi buna göre özelleştiriyorum. Amacım, teknolojiyi karmaşık olmaktan çıkarıp işinize gerçekten değer katan bir araca dönüştürmek.</p>
+
+                <div class="tech-stack">
+                    <span class="tech-item">n8n</span>
+                    <span class="tech-item">Telegram Bot API</span>
+                    <span class="tech-item">WhatsApp Business API</span>
+                    <span class="tech-item">Large Language Models</span>
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">API Integration</span>
+                    <span class="tech-item">Workflow Automation</span>
+                    <span class="tech-item">Natural Language Processing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="iletisim" class="contact-section">
+        <div class="container">
+            <div class="section-header reveal" style="text-align:center; max-width:480px; margin-left:auto; margin-right:auto;">
+                <div class="section-label" style="text-align:center;" data-tr="İletişim" data-en="Contact">İletişim</div>
+                <h2 class="section-title" style="text-align:center;" data-tr="Birlikte Çalışalım" data-en="Let's Work Together">Birlikte Çalışalım</h2>
+            </div>
+
+            <div class="contact-inner reveal">
+                <p data-tr="Projeniz hakkında konuşmak veya işletmeniz için neler yapabileceğimi öğrenmek ister misiniz?" data-en="Want to discuss your project or learn what I can do for your business?">Projeniz hakkında konuşmak veya işletmeniz için neler yapabileceğimi öğrenmek ister misiniz?</p>
+
+                <div class="contact-links">
+                    <a href="mailto:efeisik2302@gmail.com" class="contact-link">
+                        <svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+                        E-posta
+                    </a>
+                    <a href="https://www.linkedin.com/in/efe-ışık-47aa7236b" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/efeisik07" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 00-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 004 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Efe Işık</p>
+        </div>
+    </footer>
+
+    <!-- CHATBOT DEMO -->
+    <button class="chatbot-trigger" id="chatbotTrigger" aria-label="Demo Bot">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="#fff" stroke="none"/></svg>
+        <div class="badge"></div>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0110 10 10 10 0 01-10 10A10 10 0 012 12 10 10 0 0112 2"/></svg>
+            </div>
+            <div class="chatbot-header-info">
+                <h4>Demo Asistan</h4>
+                <span data-tr="Çevrimiçi" data-en="Online">Çevrimiçi</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Bir soru yazın..." readonly>
+            <button class="chatbot-send" id="chatbotSend">
+                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/905306332302" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        // ═══ PRELOADER ═══
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('done');
+            }, 600);
+        });
+
+        // ═══ SCROLL PROGRESS BAR ═══
+        const scrollProgress = document.getElementById('scrollProgress');
+
+        // ═══ NAV ACTIVE HIGHLIGHT ═══
+        const navSections = document.querySelectorAll('section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            // Progress bar
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+
+            // Nav active
+            let currentSection = '';
+            navSections.forEach(section => {
+                const top = section.offsetTop - 120;
+                if (scrollTop >= top) currentSection = section.getAttribute('id');
+            });
+            navAnchors.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + currentSection) a.classList.add('active');
+            });
+        }, { passive: true });
+
+        // ═══ THEME TOGGLE ═══
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch(e) {}
+        });
+
+        // Restore saved theme
+        try {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        } catch(e) {}
+
+        // ═══ HAMBURGER ═══
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('active')));
+
+        // ═══ HERO MOUSE GLOW ═══
+        const heroSection = document.getElementById('heroSection');
+        const heroGlow = document.getElementById('heroGlow');
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            heroGlow.style.left = (e.clientX - rect.left) + 'px';
+            heroGlow.style.top = (e.clientY - rect.top) + 'px';
+        });
+
+        // ═══ PARTICLES ═══
+        const canvas = document.getElementById('particlesCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const particleCount = 40;
+
+        function resizeCanvas() {
+            canvas.width = heroSection.offsetWidth;
+            canvas.height = heroSection.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(16, 185, 129, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(16, 185, 129, ${0.06 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            drawLines();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ═══ SERVICE CARD GLOW TRACKING ═══
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+            });
+        });
+
+        // ═══ SECTOR CARD 3D TILT ═══
+        document.querySelectorAll('.sector-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -4;
+                const rotateY = ((x - centerX) / centerX) * 4;
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // ═══ SECTION TITLE SHIMMER ON REVEAL ═══
+        const shimmerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('shimmer-active');
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.section-title').forEach(el => shimmerObserver.observe(el));
+
+        // ═══ SCROLL REVEAL ═══
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ═══ TYPING ANIMATION ═══
+        const typedEl = document.getElementById('heroTyped');
+        const sentences = {
+            tr: [
+                'İşletmenize özel akıllı asistanlar geliştiriyorum.',
+                'Müşterileriniz 7/24 anında cevap alır.',
+                'Siz işinize odaklanırsınız.',
+                'WhatsApp, Telegram — her platformda aktif.'
+            ],
+            en: [
+                'I build smart assistants tailored to your business.',
+                'Your customers get instant answers 24/7.',
+                'You focus on what matters most.',
+                'WhatsApp, Telegram — active on every platform.'
+            ]
+        };
+
+        let currentLang = 'tr';
+        let sentenceIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingTimeout;
+
+        function typeEffect() {
+            const current = sentences[currentLang][sentenceIndex];
+
+            if (isDeleting) {
+                typedEl.innerHTML = current.substring(0, charIndex - 1) + '<span class="typed-cursor"></span>';
+                charIndex--;
+            } else {
+                typedEl.innerHTML = current.substring(0, charIndex + 1) + '<span class="typed-cursor"></span>';
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 25 : 45;
+
+            if (!isDeleting && charIndex === current.length) {
+                speed = 2500;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                sentenceIndex = (sentenceIndex + 1) % sentences[currentLang].length;
+                speed = 400;
+            }
+
+            typingTimeout = setTimeout(typeEffect, speed);
+        }
+
+        typeEffect();
+
+        // ═══ SECTOR EXPAND/COLLAPSE ═══
+        function toggleSector(card) {
+            const wasExpanded = card.classList.contains('expanded');
+            document.querySelectorAll('.sector-card.expanded').forEach(c => c.classList.remove('expanded'));
+            if (!wasExpanded) card.classList.add('expanded');
+        }
+
+        // ═══ CHATBOT DEMO ═══
+        const chatTrigger = document.getElementById('chatbotTrigger');
+        const chatWindow = document.getElementById('chatbotWindow');
+        const chatClose = document.getElementById('chatbotClose');
+        const chatMessages = document.getElementById('chatbotMessages');
+        const chatInput = document.getElementById('chatbotInput');
+        const chatSend = document.getElementById('chatbotSend');
+
+        let chatOpen = false;
+        let demoRunning = false;
+
+        const demoScenarios = {
+            tr: [
+                // Sürücü Kursu
+                [
+                    { type: 'bot', text: 'Merhaba! 👋 Radar Sürücü Kursu\'na hoş geldiniz. Size nasıl yardımcı olabilirim?' },
+                    { type: 'user', text: 'Ehliyet için ne gerekiyor?' },
+                    { type: 'bot', text: 'B sınıfı ehliyet için gerekenler:\n\n• Nüfus cüzdanı fotokopisi\n• 2 adet biyometrik fotoğraf\n• Sağlık raporu\n• Kan grubu belgesi\n\nKayıt için randevu almak ister misiniz?' },
+                    { type: 'user', text: 'Fiyat ne kadar?' },
+                    { type: 'bot', text: 'B sınıfı ehliyet kurs ücreti 18.500₺\'dir. 3 ve 6 ay taksit seçenekleri mevcuttur.\n\nDetaylı bilgi için sizi kayıt danışmanımıza yönlendirebilirim.' },
+                    { type: 'user', text: 'Teşekkürler!' },
+                    { type: 'bot', text: 'Rica ederim! 🚗\n\nBu bir demo — gerçek bot işletmenize özel çalışır. Efe ile iletişime geçerek size özel demo isteyebilirsiniz.' }
+                ],
+                // Restoran & Kafe
+                [
+                    { type: 'bot', text: 'Hoş geldiniz! 👋 Lezzet Cafe\'ye hoş geldiniz. Size nasıl yardımcı olabilirim?' },
+                    { type: 'user', text: 'Menünüzde neler var?' },
+                    { type: 'bot', text: 'Günlük menümüz:\n\n🥗 Salatalar: 85₺ - 120₺\n🍔 Burgerler: 140₺ - 180₺\n🍝 Makarnalar: 110₺ - 150₺\n☕ İçecekler: 40₺ - 75₺\n\nDiğer kategorileri görmek ister misiniz?' },
+                    { type: 'user', text: 'Bu akşam için rezervasyon yapabilir miyim?' },
+                    { type: 'bot', text: 'Tabii! Bu akşam için müsait saatlerimiz:\n\n• 18:30 — 2-4 kişilik masa\n• 19:00 — 2-6 kişilik masa\n• 20:30 — 2-4 kişilik masa\n\nKaç kişilik olacak?' },
+                    { type: 'user', text: '19:00\'da 4 kişilik' },
+                    { type: 'bot', text: 'Harika! Rezervasyonunuz kaydedildi:\n📅 Bu akşam 19:00\n👥 4 kişi\n\nBu bir demo — gerçek bot işletmenize özel çalışır. Efe ile iletişime geçerek size özel demo isteyebilirsiniz. 🚀' }
+                ],
+                // Kuaför & Güzellik
+                [
+                    { type: 'bot', text: 'Merhaba! 👋 Stil Kuaför\'e hoş geldiniz. Size nasıl yardımcı olabilirim?' },
+                    { type: 'user', text: 'Saç kesim fiyatları ne kadar?' },
+                    { type: 'bot', text: 'Hizmet fiyatlarımız:\n\n✂️ Erkek saç kesim: 200₺\n💇 Kadın saç kesim: 350₺\n🎨 Boya: 600₺ - 900₺\n💅 Manikür & Pedikür: 400₺\n\nRandevu almak ister misiniz?' },
+                    { type: 'user', text: 'Yarın için müsait saat var mı?' },
+                    { type: 'bot', text: 'Yarın müsait saatlerimiz:\n\n• 10:00 — Ayşe (kıdemli stilist)\n• 11:30 — Mehmet (erkek kuaförü)\n• 14:00 — Ayşe\n• 16:00 — Zeynep\n\nHangi saati tercih edersiniz?' },
+                    { type: 'user', text: '14:00 Ayşe olsun' },
+                    { type: 'bot', text: 'Randevunuz oluşturuldu! ✅\n📅 Yarın 14:00\n💇 Ayşe — Kıdemli Stilist\n\nRandevudan 1 saat önce hatırlatma mesajı alacaksınız.\n\nBu bir demo — gerçek bot işletmenize özel çalışır. Efe ile iletişime geçin! 🚀' }
+                ],
+                // Kargo & Lojistik
+                [
+                    { type: 'bot', text: 'Merhaba! 👋 Hızlı Kargo\'ya hoş geldiniz. Size nasıl yardımcı olabilirim?' },
+                    { type: 'user', text: 'Kargom nerede?' },
+                    { type: 'bot', text: 'Takip numaranızı yazabilir misiniz? Örnek: HK-2024-78541' },
+                    { type: 'user', text: 'HK-2024-78541' },
+                    { type: 'bot', text: 'Gönderinizin durumu:\n\n📦 HK-2024-78541\n📍 Durum: Dağıtıma çıktı\n🚚 Kurye: Ahmet B.\n⏰ Tahmini teslimat: Bugün 14:00-16:00\n\nTeslimat adresiniz: Konyaaltı, Antalya\n\nBaşka bir gönderi sorgulamak ister misiniz?' },
+                    { type: 'user', text: 'Teslimat saatini değiştirebilir miyim?' },
+                    { type: 'bot', text: 'Teslimat tercihinizi güncelledim:\n⏰ Yeni saat aralığı: 17:00-19:00\n\nKurye size ulaşamadığında otomatik SMS alacaksınız.\n\nBu bir demo — gerçek bot işletmenize özel çalışır. Efe ile iletişime geçin! 🚀' }
+                ],
+                // Emlak & Gayrimenkul
+                [
+                    { type: 'bot', text: 'Merhaba! 👋 Antalya Emlak\'a hoş geldiniz. Nasıl yardımcı olabilirim?' },
+                    { type: 'user', text: 'Konyaaltı\'nda kiralık daire arıyorum' },
+                    { type: 'bot', text: 'Konyaaltı\'nda kiralık daireler:\n\n🏠 2+1 Liman Mah. — 18.000₺/ay\n🏠 3+1 Hurma Mah. — 25.000₺/ay\n🏠 1+1 Uncalı — 12.500₺/ay\n🏠 2+1 Arapsuyu — 20.000₺/ay\n\nBütçeniz ve tercihleriniz neler?' },
+                    { type: 'user', text: '2+1 olsun, 20.000₺ civarı' },
+                    { type: 'bot', text: 'Size uygun 2 ilan buldum:\n\n1️⃣ Liman Mah. 2+1 — 18.000₺\n   Eşyalı, 3. kat, asansörlü\n\n2️⃣ Arapsuyu 2+1 — 20.000₺\n   Sıfır bina, otoparklı, havuzlu site\n\nGezme randevusu almak ister misiniz?' },
+                    { type: 'user', text: 'İkisini de görmek istiyorum' },
+                    { type: 'bot', text: 'Randevularınız oluşturuldu! ✅\n\n📅 Yarın 11:00 — Liman Mah.\n📅 Yarın 12:30 — Arapsuyu\n\nDanışmanımız Murat sizi arayacak.\n\nBu bir demo — gerçek bot işletmenize özel çalışır. Efe ile iletişime geçin! 🚀' }
+                ],
+                // Otel & Pansiyon
+                [
+                    { type: 'bot', text: 'Merhaba! 👋 Sahil Otel\'e hoş geldiniz. Size nasıl yardımcı olabilirim?' },
+                    { type: 'user', text: 'Bu hafta sonu müsait odanız var mı?' },
+                    { type: 'bot', text: 'Bu hafta sonu müsait odalarımız:\n\n🛏️ Standart Oda — 2.800₺/gece\n🛏️ Deniz Manzaralı — 3.500₺/gece\n🛏️ Suite — 5.200₺/gece\n\nTüm odalarda kahvaltı dahildir.\nKaç kişi, kaç gece konaklama düşünüyorsunuz?' },
+                    { type: 'user', text: '2 kişi, 2 gece, deniz manzaralı' },
+                    { type: 'bot', text: 'Harika seçim! Detaylar:\n\n🏨 Deniz Manzaralı Oda\n👥 2 kişi\n📅 Cumartesi-Pazar (2 gece)\n💰 Toplam: 7.000₺\n☀️ Açık büfe kahvaltı dahil\n\nRezervasyon onaylansın mı?' },
+                    { type: 'user', text: 'Evet onaylayın' },
+                    { type: 'bot', text: 'Rezervasyonunuz onaylandı! ✅\n\n📧 Onay detayları e-posta adresinize gönderildi.\n🕐 Check-in: 14:00\n🕐 Check-out: 12:00\n\nBu bir demo — gerçek bot işletmenize özel çalışır. Efe ile iletişime geçin! 🚀' }
+                ]
+            ],
+            en: [
+                // Driving School
+                [
+                    { type: 'bot', text: 'Hello! 👋 Welcome to Radar Driving School. How can I help you?' },
+                    { type: 'user', text: 'What do I need for a driving license?' },
+                    { type: 'bot', text: 'For a Class B license you need:\n\n• ID card copy\n• 2 biometric photos\n• Health report\n• Blood type certificate\n\nWould you like to schedule a registration?' },
+                    { type: 'user', text: 'How much does it cost?' },
+                    { type: 'bot', text: 'Class B course fee is ₺18,500. 3 and 6 month installment options available.\n\nI can connect you with our registration advisor.' },
+                    { type: 'user', text: 'Thanks!' },
+                    { type: 'bot', text: 'You\'re welcome! 🚗\n\nThis is a demo — the real bot works with your business data. Contact Efe for a custom demo.' }
+                ],
+                // Restaurant
+                [
+                    { type: 'bot', text: 'Welcome! 👋 Welcome to Lezzet Cafe. How can I help?' },
+                    { type: 'user', text: 'What\'s on your menu?' },
+                    { type: 'bot', text: 'Today\'s menu:\n\n🥗 Salads: ₺85 - ₺120\n🍔 Burgers: ₺140 - ₺180\n🍝 Pasta: ₺110 - ₺150\n☕ Drinks: ₺40 - ₺75\n\nWant to see other categories?' },
+                    { type: 'user', text: 'Can I make a reservation for tonight?' },
+                    { type: 'bot', text: 'Sure! Available slots tonight:\n\n• 6:30 PM — 2-4 person table\n• 7:00 PM — 2-6 person table\n• 8:30 PM — 2-4 person table\n\nHow many guests?' },
+                    { type: 'user', text: '4 people at 7:00 PM' },
+                    { type: 'bot', text: 'Reserved! ✅\n📅 Tonight at 7:00 PM\n👥 4 guests\n\nThis is a demo — the real bot works with your business data. Contact Efe! 🚀' }
+                ],
+                // Hair Salon
+                [
+                    { type: 'bot', text: 'Hello! 👋 Welcome to Stil Hair Salon. How can I help?' },
+                    { type: 'user', text: 'What are your haircut prices?' },
+                    { type: 'bot', text: 'Our prices:\n\n✂️ Men\'s haircut: ₺200\n💇 Women\'s haircut: ₺350\n🎨 Coloring: ₺600 - ₺900\n💅 Manicure & Pedicure: ₺400\n\nWould you like to book?' },
+                    { type: 'user', text: 'Any slots available tomorrow?' },
+                    { type: 'bot', text: 'Tomorrow\'s openings:\n\n• 10:00 AM — Ayse (senior stylist)\n• 11:30 AM — Mehmet (barber)\n• 2:00 PM — Ayse\n• 4:00 PM — Zeynep\n\nWhich do you prefer?' },
+                    { type: 'user', text: '2:00 PM with Ayse' },
+                    { type: 'bot', text: 'Booked! ✅\n📅 Tomorrow 2:00 PM\n💇 Ayse — Senior Stylist\n\nYou\'ll get a reminder 1 hour before.\n\nThis is a demo — contact Efe for a custom bot! 🚀' }
+                ],
+                // Cargo & Logistics
+                [
+                    { type: 'bot', text: 'Hello! 👋 Welcome to Fast Cargo. How can I help?' },
+                    { type: 'user', text: 'Where is my package?' },
+                    { type: 'bot', text: 'Could you share your tracking number? Example: HK-2024-78541' },
+                    { type: 'user', text: 'HK-2024-78541' },
+                    { type: 'bot', text: 'Your shipment status:\n\n📦 HK-2024-78541\n📍 Status: Out for delivery\n🚚 Courier: Ahmet B.\n⏰ ETA: Today 2:00-4:00 PM\n\nDelivery address: Konyaaltı, Antalya\n\nWant to track another shipment?' },
+                    { type: 'user', text: 'Can I change the delivery time?' },
+                    { type: 'bot', text: 'Delivery preference updated:\n⏰ New window: 5:00-7:00 PM\n\nYou\'ll get an SMS if the courier can\'t reach you.\n\nThis is a demo — contact Efe for a custom bot! 🚀' }
+                ],
+                // Real Estate
+                [
+                    { type: 'bot', text: 'Hello! 👋 Welcome to Antalya Real Estate. How can I help?' },
+                    { type: 'user', text: 'I\'m looking for a rental in Konyaaltı' },
+                    { type: 'bot', text: 'Rentals in Konyaaltı:\n\n🏠 2+1 Liman Mah. — ₺18,000/mo\n🏠 3+1 Hurma Mah. — ₺25,000/mo\n🏠 1+1 Uncalı — ₺12,500/mo\n🏠 2+1 Arapsuyu — ₺20,000/mo\n\nWhat\'s your budget and preferences?' },
+                    { type: 'user', text: '2+1, around ₺20,000' },
+                    { type: 'bot', text: 'Found 2 matches:\n\n1️⃣ Liman Mah. 2+1 — ₺18,000\n   Furnished, 3rd floor, elevator\n\n2️⃣ Arapsuyu 2+1 — ₺20,000\n   New building, parking, pool complex\n\nWant to schedule viewings?' },
+                    { type: 'user', text: 'I\'d like to see both' },
+                    { type: 'bot', text: 'Viewings scheduled! ✅\n\n📅 Tomorrow 11:00 AM — Liman Mah.\n📅 Tomorrow 12:30 PM — Arapsuyu\n\nAgent Murat will call you.\n\nThis is a demo — contact Efe for a custom bot! 🚀' }
+                ],
+                // Hotel & Guesthouse
+                [
+                    { type: 'bot', text: 'Hello! 👋 Welcome to Sahil Hotel. How can I help?' },
+                    { type: 'user', text: 'Any rooms available this weekend?' },
+                    { type: 'bot', text: 'Available rooms this weekend:\n\n🛏️ Standard Room — ₺2,800/night\n🛏️ Sea View — ₺3,500/night\n🛏️ Suite — ₺5,200/night\n\nAll rooms include breakfast.\nHow many guests and nights?' },
+                    { type: 'user', text: '2 guests, 2 nights, sea view' },
+                    { type: 'bot', text: 'Great choice! Details:\n\n🏨 Sea View Room\n👥 2 guests\n📅 Sat-Sun (2 nights)\n💰 Total: ₺7,000\n☀️ Buffet breakfast included\n\nShall I confirm the reservation?' },
+                    { type: 'user', text: 'Yes, confirm it' },
+                    { type: 'bot', text: 'Reservation confirmed! ✅\n\n📧 Confirmation sent to your email.\n🕐 Check-in: 2:00 PM\n🕐 Check-out: 12:00 PM\n\nThis is a demo — contact Efe for a custom bot! 🚀' }
+                ]
+            ]
+        };
+
+
+        const sectorNames = {
+            tr: [
+                { icon: '<svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-2-2.2-3.5C13 5.3 11.8 5 11 5H6c-.6 0-1.1.2-1.4.6L3 8c-.6.8-1 1.5-1 2.4V16c0 .6.4 1 1 1h1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>', name: 'Sürücü Kursu' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>', name: 'Restoran & Kafe' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg>', name: 'Kuaför & Güzellik' },
+                { icon: '<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8l4-2v12l-4-2V8z"/><path d="M6 12h4"/></svg>', name: 'Kargo & Lojistik' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>', name: 'Emlak & Gayrimenkul' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M18 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M8 6h2v2H8z"/><path d="M14 6h2v2h-2z"/><path d="M8 12h2v2H8z"/><path d="M14 12h2v2h-2z"/><path d="M10 18h4v4h-4z"/></svg>', name: 'Otel & Pansiyon' }
+            ],
+            en: [
+                { icon: '<svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-2-2.2-3.5C13 5.3 11.8 5 11 5H6c-.6 0-1.1.2-1.4.6L3 8c-.6.8-1 1.5-1 2.4V16c0 .6.4 1 1 1h1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>', name: 'Driving School' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>', name: 'Restaurant & Cafe' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg>', name: 'Hair Salon & Beauty' },
+                { icon: '<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8l4-2v12l-4-2V8z"/><path d="M6 12h4"/></svg>', name: 'Cargo & Logistics' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>', name: 'Real Estate' },
+                { icon: '<svg viewBox="0 0 24 24"><path d="M18 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M8 6h2v2H8z"/><path d="M14 6h2v2h-2z"/><path d="M8 12h2v2H8z"/><path d="M14 12h2v2h-2z"/><path d="M10 18h4v4h-4z"/></svg>', name: 'Hotel & Guesthouse' }
+            ]
+        };
+
+        function showSectorPicker() {
+            chatMessages.innerHTML = '';
+            const greeting = document.createElement('div');
+            greeting.className = 'chat-msg bot';
+            greeting.textContent = currentLang === 'tr'
+                ? 'Merhaba! 👋 Hangi sektör için demo görmek istersiniz?'
+                : 'Hello! 👋 Which industry demo would you like to see?';
+            chatMessages.appendChild(greeting);
+
+            const picker = document.createElement('div');
+            picker.className = 'chat-sector-picker';
+            sectorNames[currentLang].forEach((sector, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'chat-sector-btn';
+                btn.innerHTML = sector.icon + '<span>' + sector.name + '</span>';
+                btn.addEventListener('click', () => {
+                    if (!demoRunning) startDemo(i);
+                });
+                picker.appendChild(btn);
+            });
+            chatMessages.appendChild(picker);
+        }
+
+        chatTrigger.addEventListener('click', () => {
+            chatOpen = !chatOpen;
+            chatWindow.classList.toggle('open', chatOpen);
+            if (chatOpen && !demoRunning) showSectorPicker();
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatOpen = false;
+            chatWindow.classList.remove('open');
+        });
+
+        function addMessage(type, text) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-msg ' + type;
+            msg.textContent = text;
+            msg.style.whiteSpace = 'pre-line';
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const typing = document.createElement('div');
+            typing.className = 'chat-typing';
+            typing.id = 'chatTyping';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            chatMessages.appendChild(typing);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const t = document.getElementById('chatTyping');
+            if (t) t.remove();
+        }
+
+        async function startDemo(sectorIdx) {
+            demoRunning = true;
+            chatMessages.innerHTML = '';
+            const convo = demoScenarios[currentLang][sectorIdx];
+
+            for (let i = 0; i < convo.length; i++) {
+                const msg = convo[i];
+                if (msg.type === 'bot') {
+                    showTyping();
+                    await new Promise(r => setTimeout(r, 1200 + Math.random() * 800));
+                    removeTyping();
+                    addMessage('bot', msg.text);
+                } else {
+                    await new Promise(r => setTimeout(r, 1500));
+                    chatInput.value = msg.text;
+                    await new Promise(r => setTimeout(r, 500));
+                    chatInput.value = '';
+                    addMessage('user', msg.text);
+                }
+            }
+
+            // Demo bittikten sonra tekrar seçici göster
+            await new Promise(r => setTimeout(r, 2000));
+            const again = document.createElement('div');
+            again.className = 'chat-msg bot';
+            again.textContent = currentLang === 'tr'
+                ? 'Başka bir sektör denemek ister misiniz?'
+                : 'Want to try another industry?';
+            chatMessages.appendChild(again);
+
+            const picker = document.createElement('div');
+            picker.className = 'chat-sector-picker';
+            sectorNames[currentLang].forEach((sector, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'chat-sector-btn';
+                btn.innerHTML = sector.icon + '<span>' + sector.name + '</span>';
+                btn.addEventListener('click', () => {
+                    if (!demoRunning) startDemo(i);
+                });
+                picker.appendChild(btn);
+            });
+            chatMessages.appendChild(picker);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            demoRunning = false;
+        }
+
+        // Replay on send click — show picker
+        chatSend.addEventListener('click', () => {
+            if (!demoRunning) showSectorPicker();
+        });
+
+        // ═══ LANGUAGE SWITCHER ═══
+        function switchLang(lang) {
+            currentLang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'A' && el.querySelector('svg')) {
+                    const svg = el.querySelector('svg').outerHTML;
+                    el.innerHTML = text + ' ' + svg;
+                } else if (el.childElementCount === 0 || el.querySelector('.typed-cursor')) {
+                    if (el.id === 'heroTyped') return;
+                    el.textContent = text;
+                } else {
+                    el.childNodes.forEach(node => {
+                        if (node.nodeType === 3 && node.textContent.trim()) {
+                            node.textContent = text;
+                        }
+                    });
+                }
+            });
+
+            // Reset typing animation for new language
+            clearTimeout(typingTimeout);
+            sentenceIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+            typedEl.innerHTML = '<span class="typed-cursor"></span>';
+            setTimeout(typeEffect, 300);
+
+            document.documentElement.lang = lang === 'tr' ? 'tr' : 'en';
+        }
+    </script>
+</body>
+</html>
