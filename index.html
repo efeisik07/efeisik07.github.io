@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Efe Işık — AI & Otomasyon Çözümleri</title>
     <meta name="description" content="Antalya merkezli AI otomasyon geliştiricisi. İşletmenize özel chatbot, WhatsApp ve Telegram entegrasyonu çözümleri.">
     <meta property="og:title" content="Efe Işık — AI & Otomasyon Çözümleri">
@@ -875,9 +875,10 @@
         .chatbot-trigger {
             position: fixed;
             bottom: 96px;
+            bottom: calc(96px + env(safe-area-inset-bottom, 0px));
             right: 28px;
-            z-index: 998;
-            display: flex;
+            z-index: 9990;
+            display: flex !important;
             align-items: center;
             gap: 10px;
             padding: 12px 20px 12px 16px;
@@ -888,6 +889,8 @@
             box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4), 0 0 40px rgba(16, 185, 129, 0.15);
             transition: all 0.3s;
             animation: chatbotGlow 2.5s ease-in-out infinite;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         @keyframes chatbotGlow {
@@ -1167,26 +1170,29 @@
                 bottom: 140px;
                 width: auto;
             }
-            .chatbot-trigger { bottom: 82px; right: 16px; padding: 10px 16px 10px 12px; font-size: 0.8rem; }
+            .chatbot-trigger { bottom: 82px !important; bottom: calc(82px + env(safe-area-inset-bottom, 0px)) !important; right: 16px; padding: 10px 16px 10px 12px; font-size: 0.8rem; display: flex !important; }
         }
 
         /* ═══ WHATSAPP FLOAT ═══ */
         .whatsapp-float {
             position: fixed;
             bottom: 28px;
+            bottom: calc(28px + env(safe-area-inset-bottom, 0px));
             right: 28px;
-            z-index: 999;
+            z-index: 9990;
             width: 56px;
             height: 56px;
             border-radius: 50%;
             background: #25d366;
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: center;
             text-decoration: none;
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
             transition: all 0.3s;
             animation: whatsappPulse 2s infinite;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         .whatsapp-float:hover {
@@ -1223,6 +1229,8 @@
         .preloader.done {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .preloader-logo {
@@ -1565,9 +1573,9 @@
             .section-description { font-size: 0.9rem; }
             .sector-card { padding: 1.25rem; }
             .service-card { padding: 1.5rem; }
-            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .whatsapp-float { bottom: 20px !important; bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important; right: 20px; width: 50px; height: 50px; display: flex !important; visibility: visible !important; opacity: 1 !important; }
             .whatsapp-float svg { width: 24px; height: 24px; }
-            .chatbot-trigger { bottom: 82px; right: 16px; padding: 10px 16px 10px 12px; font-size: 0.8rem; }
+            .chatbot-trigger { bottom: 82px !important; bottom: calc(82px + env(safe-area-inset-bottom, 0px)) !important; right: 16px; padding: 10px 16px 10px 12px; font-size: 0.8rem; display: flex !important; visibility: visible !important; opacity: 1 !important; }
             .about-content { flex-direction: column; gap: 2rem; }
             .about-text { max-width: 100%; }
             .tech-stack { justify-content: center; }
@@ -2011,11 +2019,13 @@
         }
 
         // ═══ PRELOADER ═══
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('done');
-            }, 600);
-        });
+        function hidePreloader() {
+            var p = document.getElementById('preloader');
+            if (p && !p.classList.contains('done')) p.classList.add('done');
+        }
+        window.addEventListener('load', () => { setTimeout(hidePreloader, 600); });
+        // Fallback: force hide preloader after 3 seconds even if load event fails
+        setTimeout(hidePreloader, 3000);
 
         // ═══ NAV ACTIVE HIGHLIGHT ═══
         const navSections = document.querySelectorAll('section[id]');
